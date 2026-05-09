@@ -3,7 +3,7 @@
   <metadata>
     <id>MdreamWrapper</id>
     <version>1.1.0</version>
-    <description>Native C ABI wrapper around mdream for P/Invoke from .NET</description>
+    <description>C# wrapper with native mdream (HTML to Markdown) via P/Invoke</description>
     <authors>fan92rus</authors>
     <repository type="git" url="https://github.com/fan92rus/mdream-wrapper" />
     <license type="expression">MIT</license>
@@ -16,5 +16,6 @@
     <file src="README.md" target="" />
     <file src="build\MdreamWrapper.targets" target="build\net9.0\MdreamWrapper.targets" />
     <file src="artifacts\win-x64\mdream_wrapper.dll" target="runtimes\win-x64\native\mdream_wrapper.dll" />
+    <file src="artifacts\managed\net9.0\MdreamWrapper.dll" target="lib\net9.0\MdreamWrapper.dll" />
   </files>
 </package>

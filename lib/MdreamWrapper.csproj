@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MdreamWrapper</RootNamespace>
+    <AssemblyName>MdreamWrapper</AssemblyName>
+    <PackageId>MdreamWrapper</PackageId>
+    <Version>1.2.0</Version>
+    <Description>C# wrapper with native mdream (HTML to Markdown) via P/Invoke</Description>
+    <Authors>fan92rus</Authors>
+    <RepositoryUrl>https://github.com/fan92rus/mdream-wrapper</RepositoryUrl>
+    <LicenseExpression>MIT</LicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\target\release\mdream_wrapper.dll"
+          Pack="true" PackagePath="runtimes\win-x64\native\mdream_wrapper.dll"
+          Condition="Exists('..\target\release\mdream_wrapper.dll')" />
+  </ItemGroup>
+
+</Project>

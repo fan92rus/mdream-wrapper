@@ -1,1 +1,5 @@
 /target
+/artifacts
+/lib/bin
+/lib/obj
+/dist

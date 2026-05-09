@@ -28,16 +28,18 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-
 
-      - name: Build
+      - name: Build native DLL
         run: cargo build --release
 
-      - name: Prepare artifacts
-        run: |
-          mkdir -p artifacts/win-x64
-          cp target/release/mdream_wrapper.dll artifacts/win-x64/
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
 
       - name: Pack NuGet
-        run: nuget pack MdreamWrapper.nuspec -OutputDirectory dist
+        run: |
+          $version = "${{ github.ref_name }}" -replace '^v',''
+          dotnet pack lib/MdreamWrapper.csproj -c Release -o dist -p:Version=$version
 
       - name: Upload NuGet package
         uses: actions/upload-artifact@v4
