@@ -16,6 +16,7 @@
     <file src="README.md" target="" />
     <file src="build\MdreamWrapper.targets" target="build\net9.0\MdreamWrapper.targets" />
     <file src="artifacts\win-x64\mdream_wrapper.dll" target="runtimes\win-x64\native\mdream_wrapper.dll" />
+    <file src="artifacts\linux-x64\libmdream_wrapper.so" target="runtimes\linux-x64\native\libmdream_wrapper.so" />
     <file src="artifacts\managed\net9.0\MdreamWrapper.dll" target="lib\net9.0\MdreamWrapper.dll" />
   </files>
 </package>

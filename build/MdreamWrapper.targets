@@ -1,8 +1,16 @@
 <Project>
-  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\..\runtimes\win-x64\native\mdream_wrapper.dll')">
+  <ItemGroup Condition="'$(RuntimeIdentifier)' == 'win-x64' Or '$(RuntimeIdentifier)' == ''">
     <None Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x64\native\mdream_wrapper.dll"
           CopyToOutputDirectory="PreserveNewest"
           Link="mdream_wrapper.dll"
-          Visible="false" />
+          Visible="false"
+          Condition="Exists('$(MSBuildThisFileDirectory)..\..\runtimes\win-x64\native\mdream_wrapper.dll')" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+    <None Include="$(MSBuildThisFileDirectory)..\..\runtimes\linux-x64\native\libmdream_wrapper.so"
+          CopyToOutputDirectory="PreserveNewest"
+          Link="libmdream_wrapper.so"
+          Visible="false"
+          Condition="Exists('$(MSBuildThisFileDirectory)..\..\runtimes\linux-x64\native\libmdream_wrapper.so')" />
   </ItemGroup>
 </Project>
