@@ -31,15 +31,30 @@ jobs:
       - name: Build native DLL
         run: cargo build --release
 
+      - name: Prepare native artifact
+        run: |
+          mkdir -p artifacts/win-x64
+          cp target/release/mdream_wrapper.dll artifacts/win-x64/
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
+      - name: Build managed library
+        run: dotnet build lib/MdreamWrapper.csproj -c Release -o artifacts/managed/net9.0
+
+      - name: Install nuget.exe
+        run: |
+          $nugetPath = "$env:USERPROFILE\.nuget\local\nuget.exe"
+          New-Item -ItemType Directory -Force -Path (Split-Path $nugetPath)
+          Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile $nugetPath
+          echo "$env:USERPROFILE\.nuget\local" | Out-File -Append $env:GITHUB_PATH
+
       - name: Pack NuGet
         run: |
           $version = "${{ github.ref_name }}" -replace '^v',''
-          dotnet pack lib/MdreamWrapper.csproj -c Release -o dist -p:Version=$version
+          nuget pack MdreamWrapper.nuspec -OutputDirectory dist -Version $version
 
       - name: Upload NuGet package
         uses: actions/upload-artifact@v4
